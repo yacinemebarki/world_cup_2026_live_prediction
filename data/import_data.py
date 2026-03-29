@@ -17,6 +17,4 @@ for file in os.listdir(downlaod_path):
                 os.makedirs(target_folder)
             src_path=os.path.join(downlaod_path,file)
             target_path=os.path.join(target_folder,file)
-            shutil.move(src_path,target_path)
-                
-                
+            shutil.move(src_path,target_path)                            
