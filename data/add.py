@@ -9,15 +9,21 @@ pattern=r"players"
 pattern2=r"matches"
 
 for file in os.listdir(downlaod_path):
-    if file.endswith(".csv"):
-        match=re.search(pattern,file)
-        match2=re.search(pattern2,file)
-        if match:
-            src_path=os.path.join(downlaod_path,file)
+
+    if not file.endswith(".csv"):
+        continue
+    
+    match=re.search(pattern, file)
+    match2=re.search(pattern2, file)
+
+    if match or match2:
+        src_path=os.path.join(downlaod_path, file)
+        dest_path=os.path.join(target_path, file)
+
+        
+        if os.path.exists(dest_path):
             
-            shutil.move(src_path,target_path)
-        if match2:
-            src_path=os.path.join(downlaod_path,file)
-            
-            shutil.move(src_path,target_path)            
+            continue
+        shutil.move(src_path, dest_path)
+                   
                  
