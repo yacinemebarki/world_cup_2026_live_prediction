@@ -1,0 +1,16 @@
+{
+    "Argentina": [
+        {
+            "Argentina": [
+                {
+                    "id": 1,
+                    "date": "2022-12-09T19:00:00Z",
+                    "where": "H",
+                    "result": "3:4",
+                    "home_age": 27.0,
+                    "away_age": 27.0
+                }
+            ]
+        }
+    ]
+}

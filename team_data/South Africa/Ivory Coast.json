@@ -1,0 +1,16 @@
+{
+    "Ivory Coast": [
+        {
+            "Ivory Coast": [
+                {
+                    "id": 1,
+                    "date": "2023-10-17T19:00:00Z",
+                    "where": "A",
+                    "result": "1:1",
+                    "home_age": 26.0,
+                    "away_age": 28.09090909090909
+                }
+            ]
+        }
+    ]
+}

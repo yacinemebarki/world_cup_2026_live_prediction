@@ -1,0 +1,28 @@
+{
+    "Cameroon": [
+        {
+            "Cameroon": [
+                {
+                    "id": 1,
+                    "date": "2024-01-19T17:00:00Z",
+                    "where": "H",
+                    "result": "3:1",
+                    "home_age": 27.0,
+                    "away_age": 27.0
+                }
+            ]
+        },
+        {
+            "Cameroon": [
+                {
+                    "id": 1,
+                    "date": "2023-10-16T18:30:00Z",
+                    "where": "H",
+                    "result": "1:0",
+                    "home_age": 28.0,
+                    "away_age": 27.09090909090909
+                }
+            ]
+        }
+    ]
+}

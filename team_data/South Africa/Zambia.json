@@ -1,0 +1,16 @@
+{
+    "Zambia": [
+        {
+            "Zambia": [
+                {
+                    "id": 1,
+                    "date": "2023-07-14T16:00:00Z",
+                    "where": "H",
+                    "result": "1:2",
+                    "home_age": 27.0,
+                    "away_age": 24.0
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,16 @@
+{
+    "South Korea": [
+        {
+            "South Korea": [
+                {
+                    "id": 1,
+                    "date": "2022-12-02T15:00:00Z",
+                    "where": "A",
+                    "result": "1:2",
+                    "home_age": 28.636363636363637,
+                    "away_age": 27.0
+                }
+            ]
+        }
+    ]
+}

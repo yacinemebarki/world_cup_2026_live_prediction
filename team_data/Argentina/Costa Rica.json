@@ -1,0 +1,16 @@
+{
+    "Costa Rica": [
+        {
+            "Costa Rica": [
+                {
+                    "id": 1,
+                    "date": "2024-03-27T02:50:00Z",
+                    "where": "H",
+                    "result": "3:1",
+                    "home_age": 28.0,
+                    "away_age": 26.363636363636363
+                }
+            ]
+        }
+    ]
+}

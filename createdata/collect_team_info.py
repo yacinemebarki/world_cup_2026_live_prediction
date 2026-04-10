@@ -35,10 +35,14 @@ with sync_playwright() as p:
     html=page.content()
     soup=BeautifulSoup(html, "html.parser")
     teams=soup.select("td.team-name")
+    search_team=["Colombia","Croatia","England","Ghana","Panama"]
 
     for t in teams:
         
         dic=t.text.strip()
+        current_team=dic
+        if current_team not in search_team:
+            continue
         dic=os.path.join(path,dic)
         
         if not os.path.exists(dic):
@@ -49,7 +53,7 @@ with sync_playwright() as p:
         html=page.content()
         team_soup=BeautifulSoup(html,"html.parser")
         option=team_soup.select("select.navigation.season-navigation option")
-        valid_years = [opt for opt in option if opt.text.strip().isdigit() and int(opt.text.strip()) >= 1998]
+        valid_years = [opt for opt in option if opt.text.strip().isdigit() and int(opt.text.strip()) >= 2022 and int(opt.text.strip())<=2026]
             
         
         for year in valid_years:
@@ -66,10 +70,19 @@ with sync_playwright() as p:
             
             for matche in all_matche:
                 
+                
+                
                 matche_dt=matche.get('data-datetime')
                 where=matche.find("td",class_="match-homeaway").text.strip()
                 oppo=matche.find("td",class_="team-shortname_extended").text.strip()
                 result=matche.select_one("td.match-result span a")
+                
+                target_path = os.path.join("./team_data", oppo)
+                team_file = current_team + ".json"
+
+                if os.path.exists(target_path):
+                    if team_file in os.listdir(target_path):
+                        continue
                 
                 if result.text.strip()!="-:-":
                     
@@ -83,33 +96,49 @@ with sync_playwright() as p:
                     home_team=player_soup.select_one("div.hs-lineup--starter.home")
                     away_team=player_soup.select_one("div.hs-lineup--starter.away")
                     
+                    
+                    if home_team is None or away_team is None:
+                        print(f"Skipping match {matche_dt} vs {oppo}: lineup not found")
+                        continue
+                    
                     players_home=home_team.select(".person-name a")
                     players_away=away_team.select(".person-name a")
                     
                     home=0
                     away=0
-                    
+                    player_not_found=0
                     for player in players_home:
                         player_link=base+player["href"]
                         page.goto(player_link,wait_until="domcontentloaded",timeout=60000)
                         html=page.content()
                         info=BeautifulSoup(html,"html.parser")
-                        birthday=info.select_one("dd.person-birthday").text
-                        age=cal_age(matche_dt,birthday)
-                        home=age+home
-                        
-                    home_age=home/11
-                    
+                        birthday=info.select_one("dd.person-birthday")
+                        if birthday is None:
+                            player_not_found+=1
+                            print("player not found birthday")
+                        else :
+                            birthday=birthday.text.strip()    
+                            age=cal_age(matche_dt,birthday)
+                            home=age+home
+                    total_player=11-player_not_found    
+                    home_age=home/total_player if total_player else 0
+                    player_not_found=0
                     for player in players_away:
                         player_link=base+player["href"]
                         page.goto(player_link,wait_until="domcontentloaded",timeout=60000)
                         html=page.content()
                         info=BeautifulSoup(html,"html.parser")
-                        birthday=info.select_one("dd.person-birthday").text
-                        age=cal_age(matche_dt,birthday)
-                        away=age+away
-                    
-                    away_age=away/11
+                        birthday=info.select_one("dd.person-birthday")
+                        if birthday is None:
+                            player_not_found+=1
+                            print("player not found birthday")
+                        else :
+                            birthday=birthday.text.strip()    
+                            age=cal_age(matche_dt,birthday)
+                            
+                            away=age+away
+                    total_player=11-player_not_found    
+                    away_age=away/total_player if total_player else 0
                     
                                            
                         
@@ -118,16 +147,19 @@ with sync_playwright() as p:
                     
                     if not os.path.exists(file_path):
                         open(file_path,"a").close()
+                        n=1
                         
                         with open(file_path,"w") as f:
                             json.dump({oppo: []},f,indent=4)
+                        
                     
                     with open(file_path,"r") as f:
                         data=json.load(f)
-                        
+                    n=len(data)    
                     matches_list=data.get(oppo, [])    
-                    n=len(data)
+                    
                     new_match={oppo:[{"id":n,"date":matche_dt,"where":where,"result":result.text.strip(),"home_age":home_age,"away_age":away_age}]}
+                    
                     matches_list.append(new_match)
                     data[oppo]=matches_list
                     with open(file_path, "w") as f:

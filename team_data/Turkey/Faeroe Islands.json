@@ -1,0 +1,28 @@
+{
+    "Faeroe Islands": [
+        {
+            "Faeroe Islands": [
+                {
+                    "id": 1,
+                    "date": "2022-06-04T18:45:00Z",
+                    "where": "H",
+                    "result": "4:0",
+                    "home_age": 24.818181818181817,
+                    "away_age": 30.454545454545453
+                }
+            ]
+        },
+        {
+            "Faeroe Islands": [
+                {
+                    "id": 1,
+                    "date": "2022-09-25T18:45:00Z",
+                    "where": "A",
+                    "result": "2:1",
+                    "home_age": 29.09090909090909,
+                    "away_age": 24.727272727272727
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,28 @@
+{
+    "Liechtenstein": [
+        {
+            "Liechtenstein": [
+                {
+                    "id": 1,
+                    "date": "2023-03-23T19:45:00Z",
+                    "where": "H",
+                    "result": "4:0",
+                    "home_age": 29.272727272727273,
+                    "away_age": 27.363636363636363
+                }
+            ]
+        },
+        {
+            "Liechtenstein": [
+                {
+                    "id": 1,
+                    "date": "2023-11-16T19:45:00Z",
+                    "where": "A",
+                    "result": "2:0",
+                    "home_age": 27.727272727272727,
+                    "away_age": 27.09090909090909
+                }
+            ]
+        }
+    ]
+}

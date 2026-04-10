@@ -1,0 +1,28 @@
+{
+    "Solomon Islands": [
+        {
+            "Solomon Islands": [
+                {
+                    "id": 1,
+                    "date": "2024-06-18T04:00:00Z",
+                    "where": "H",
+                    "result": "3:0",
+                    "home_age": 25.09090909090909,
+                    "away_age": 27.09090909090909
+                }
+            ]
+        },
+        {
+            "Solomon Islands": [
+                {
+                    "id": 1,
+                    "date": "2022-03-30T17:00:00Z",
+                    "where": "A",
+                    "result": "5:0",
+                    "home_age": 27.272727272727273,
+                    "away_age": 26.363636363636363
+                }
+            ]
+        }
+    ]
+}

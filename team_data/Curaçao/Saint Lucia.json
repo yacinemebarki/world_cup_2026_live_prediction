@@ -1,0 +1,40 @@
+{
+    "Saint Lucia": [
+        {
+            "Saint Lucia": [
+                {
+                    "id": 1,
+                    "date": "2025-06-06T23:30:00Z",
+                    "where": "H",
+                    "result": "4:0",
+                    "home_age": 29.181818181818183,
+                    "away_age": 27.272727272727273
+                }
+            ]
+        },
+        {
+            "Saint Lucia": [
+                {
+                    "id": 1,
+                    "date": "2024-09-06T21:00:00Z",
+                    "where": "A",
+                    "result": "2:1",
+                    "home_age": 27.0,
+                    "away_age": 27.545454545454547
+                }
+            ]
+        },
+        {
+            "Saint Lucia": [
+                {
+                    "id": 1,
+                    "date": "2024-11-18T23:00:00Z",
+                    "where": "H",
+                    "result": "4:1",
+                    "home_age": 28.181818181818183,
+                    "away_age": 27.0
+                }
+            ]
+        }
+    ]
+}
