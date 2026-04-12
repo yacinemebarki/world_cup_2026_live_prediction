@@ -59,8 +59,8 @@ for dirc in os.listdir(path):
                 else :
                     away_team=dirc
                     home_team=oppenet
-                    home_goals=int(result.split(":")[1])
-                    away_goals=int(result.split(":")[0])
+                    home_goals=int(result.split(":")[0])
+                    away_goals=int(result.split(":")[1])
                 writer.writerow([home_team,away_team,home_goals,away_goals,home_age,away_age,date])    
 
                 
