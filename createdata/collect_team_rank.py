@@ -25,68 +25,43 @@ dates = [
 for i in range(len(dates)):
     dates[i]=datetime.strptime(dates[i], "%d/%m/%Y").strftime("%Y-%m-%d")
 
-world_cup_2026_teams = [
-    # Hosts
-    "Canada", "Mexico", "USA",
-
-    # AFC (Asia)
-    "Australia", "IR Iran", "Japan", "Jordan", "Korea Republic",
-    "Qatar", "Saudi Arabia", "Uzbekistan",
-
-    # CAF (Africa)
-    "Algeria", "Cabo Verde", "Côte d'Ivoire", "Egypt", "Ghana",
-    "Morocco", "Senegal", "South Africa", "Tunisia",
-
-    # CONCACAF (North & Central America, Caribbean)
-    "Curacao", "Haiti", "Panama",
-
-    # CONMEBOL (South America)
-    "Argentina", "Brazil", "Colombia", "Ecuador", "Paraguay", "Uruguay",
-
-    # OFC (Oceania)
-    "New Zealand",
-
-    # UEFA (Europe)
-    "Austria", "Belgium", "Bosnia and Herzegovina", "Croatia", "Czechia",
-    "England", "France", "Germany", "Netherlands", "Norway",
-    "Portugal", "Scotland", "Spain", "Sweden", "Switzerland", "Turkey",
-
-    # Play-Off Tournament winners
-    "Bolivia", "Congo DR", "Iraq"
-]
-
 class team:
-    def __init__(self,name,rank,point,conf):
+    def __init__(self,name,rank,point,conf,abrv):
         self.name=name
         self.rank=rank
         self.rank_change=0
         self.prv_point=0
         self.point=point
         self.conf=conf
+        self.abrv=abrv
         
         self.conf=None
 
 
 teams=[]
-spcial_teams={"IR Iran":"Iran","Turkey":"Turkiye","Korea Republic":"South Korea","Côte d'Ivoire":"Ivory Coast","Congo DR":"DR Congo","Cabo Verde":"Cape Verde","Curacao":"Curaçao","USA":"United States"}
 
 df=pd.read_csv("./team_data/fifa_ranking-2024-06-20.csv")
 df=df[df["rank_date"]=="2024-06-20"]
+spcial_teams={"IR Iran":"Iran","Turkey":"Turkiye","Korea Republic":"South Korea","Côte d'Ivoire":"Ivory Coast","Congo DR":"DR Congo","Cabo Verde":"Cape Verde","Curacao":"Curaçao","USA":"United States","Czech Republic":"Czechia"}
 
-for tea in world_cup_2026_teams:
-    row=df[df["country_full"] == tea]
-    if row.empty:
-        print("Missing team:", tea)
-        continue
-    if tea in spcial_teams:
-        tea=spcial_teams[tea]
-    row=row.iloc[0]
-
-    rank=int(row["rank"])
-    point=float(row["total_points"])
+for _,row in df.iterrows():
+    tea=row["country_full"]
+    rank=row["rank"]
+    point=row["total_points"]
     conf=row["confederation"]
+    abrv=row["country_abrv"]
+    if pd.isna(rank):
+        rank=None
+    else :
+        rank=int(rank)    
+    if pd.isna(point):
+        point=None
+    else :
+        point=float(point)  
+    if tea in spcial_teams:
+        tea=spcial_teams[tea]          
 
-    teams.append(team(tea, rank, point, conf))
+    teams.append(team(tea, rank, point, conf,abrv))
    
 
 names=[]
@@ -99,7 +74,7 @@ with sync_playwright() as p:
         
         teams_name=[]
         date=date
-        for i in range(1,5):
+        for i in range(1,9):
             url=f"https://www.transfermarkt.com/statistik/weltrangliste/statistik/stat/plus/0/galerie/0?page={i}&datum={date}"
             page.goto(url,wait_until="domcontentloaded",timeout=60000)
             html=page.content()
@@ -145,13 +120,16 @@ with sync_playwright() as p:
                     
                     
                     if te.name==name:
-                        te.rank_change=te.rank-rank
+                        if te.rank is not None:
+                            te.rank_change = te.rank - rank
+                        else:
+                            te.rank_change = 0
                         te.rank=rank
                         te.prv_point=te.point
                         te.point=point
                         with open("./team_data/fifa_ranking-2024-06-20.csv","a", newline="") as f:
                             writer=csv.writer(f)
-                            writer.writerow([te.rank,te.name,te.name,te.point,te.prv_point,te.rank_change,te.conf,date])
+                            writer.writerow([te.rank,te.name,te.abrv,te.point,te.prv_point,te.rank_change,te.conf,date])
                         
                         world_cup_teams.remove(te)
                         print("a teams was add")
