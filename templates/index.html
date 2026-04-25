@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>world cup predictions</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <header>
+        <h1>FIFA world cup 2026 shedule and predictions</h1>
+        
+    </header>
+    <nav>
+        <button class="tab-btn" onclick="showStage('gs')">Group Stage</button>
+        <button class="tab-btn" onclick="showStage('r32')">Round of 32</button>
+        <button class="tab-btn" onclick="showStage('r16')">Round of 16</button>
+        <button class="tab-btn" onclick="showStage('qf')">Quarterfinals</button>
+        <button class="tab-btn" onclick="showStage('sf')">Semifinals</button>
+        <button class="tab-btn" onclick="showStage('fin')">Final</button>
+    </nav>
+    <div class="search-bar">
+        <input type="text" id="search-input" placeholder="search for team">
+    </div>
+    <div class="Groupe">
+        <div class="Groupe-classment">
+            <table>
+                <tr class="groupe-title">
+                    <td colspan=""></td>
+                </tr>
+                <tr class="stats">
+                    <th class="position">pos</th>
+                    <th class="flag">flag</th>
+                    <th class="team">name</th>
+                    <th class="play">P</th>
+                    <th class="win">W</th>
+                    <t class="draw">D</th>
+                    <th class="lose">L</th>
+                    <th class="goals-for">GF</th>
+                    <th class="goals-against">GA</th>
+                    <th class="goal-diff">diff</th>
+                    <th class="points">Pts</th>
+                </tr>
+                <tr class="team-groupe-info">
+                    <th class="info-pos"></th>
+                    <th class="info-flag"></th>
+                    <th class="info-team"></th>
+                    <th class="info-play"></th>
+                    <th class="info-win"></th>
+                    <th class="info-draw"></th>
+                    <th class="info-lose"></th>
+                    <th class="info-goals-for"></th>
+                    <th class="info-goals-against"></th>
+                    <th class="info-goals-diff"></th>
+                    <th class="info-points"></th>
+                </tr>
+            </table>
+        </div>
+        <div class="Groupe-match">
+            <div class="day-label"></div>
+            <div class="match-card" data-search="france senegal">
+                <div class="match-groupe"></div>
+                <div class="match-time"></div>
+                <div class="team-home">
+                    <span class="team-name"></span>
+                    <span class="flag"></span>
+                </div>
+                <div class="vs-block">
+                    <div class="vs-text">VS</div>
+                    <div class="match-no"></div></div>
+                <div class="team-away">
+                    <span class="team-name"></span>
+                    <span class="flag"></span>
+                </div>
+                <div class="match-venue">
+                    <div class="venue-city"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
